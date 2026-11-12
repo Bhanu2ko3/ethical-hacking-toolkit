@@ -74,4 +74,4 @@
 
 ## 6. Ethics & Legal Notice
 
-> **IMPORTANT:** This documentation and associated hardware are strictly for educational research, academic coursework (e.g., NIBM Cybersecurity degree studies), and authorized testing on self-owned networks and lab environments. Unauthorized interception or disruption of third-party wireless networks is strictly illegal under cybercrime laws.
+> **IMPORTANT:** This documentation and associated hardware are strictly for independent personal research, self-study, and authorized testing on self-owned networks and lab environments. Unauthorized interception or disruption of third-party wireless networks is strictly illegal under cybercrime laws.

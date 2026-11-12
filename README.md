@@ -8,7 +8,7 @@ An open-source, modular repository dedicated to educational cybersecurity resear
 
 This repository serves as a centralized hub for ongoing hands-on cybersecurity research and laboratory experiments. Designed to expand over time, it encompasses diverse areas of offensive security principles, defensive validation, hardware micro-controller testing, and custom security scripts.
 
-All materials, scripts, and documentation within this project are developed in alignment with academic coursework and authorized laboratory simulations.
+All materials, scripts, and documentation within this project are developed as part of independent personal research, self-study, and authorized laboratory simulations.
 
 ---
 
@@ -58,7 +58,7 @@ The project is structured modularly to support multiple domains of security expl
 ## 🛡️ Ethics, Legal Compliance & Disclaimer
 
 > **DISCLAIMER:**  
-> The contents of this repository are provided exclusively for **educational, academic, and defensive research purposes**. 
+> The contents of this repository are provided exclusively for **independent educational, self-study, and defensive research purposes**. 
 > All experiments and tools must be executed only on hardware, networks, and systems that you own or have explicit, documented authorization to test. 
 > The author and contributors assume no liability for misuse or damage caused by the application of techniques documented here.
 
@@ -67,3 +67,4 @@ The project is structured modularly to support multiple domains of security expl
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
+
