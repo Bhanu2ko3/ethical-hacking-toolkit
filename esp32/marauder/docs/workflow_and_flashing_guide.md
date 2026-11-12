@@ -102,17 +102,21 @@ sudo usermod -aG dialout $USER
 The official firmware binaries are released on the project's GitHub release repository:
 * **GitHub Releases:** [https://github.com/justcallmekoko/ESP32Marauder/releases](https://github.com/justcallmekoko/ESP32Marauder/releases)
 
-For the headless ESP32 DevKit V1, obtain the latest release assets:
-1. `bootloader.bin`
-2. `partitions.bin`
-3. `esp32_marauder_vX.X_esp32_ldb.bin` (or `_esp32.bin` headless version)
+For the headless ESP32 DevKit V1 (v1.20.0 release), you only need these specific files (no need to download the full repository source code):
 
-Place these three downloaded files directly into the `esp32/marauder/firmware/` folder:
+1. **Main Application Firmware:**
+   * `esp32_marauder_v1_20_0_20261028_esp32_lddb.bin` (under Release Assets)
+2. **Bootloader, Partitions & Boot App:**
+   *(Click "Show all 33 assets" on the release page or grab from `FlashFiles/`)*
+   * `esp32_marauder.ino.bootloader.bin` (or `bootloader.bin`)
+   * `esp32_marauder.ino.partitions.bin` (or `partitions.bin`)
+   * `boot_app0.bin`
+
+Place these files directly into the `esp32/marauder/firmware/` directory:
 
 ```bash
-cd esp32/marauder/firmware/
-# Example manual download commands:
-# wget https://github.com/justcallmekoko/ESP32Marauder/releases/download/vX.X.X/esp32_marauder_vX.X.X_esp32_ldb.bin
+# Verify your downloaded files exist in firmware/:
+ls -la esp32/marauder/firmware/
 ```
 
 #### 4.3 Step 1: Query Chip Information
@@ -131,13 +135,14 @@ esptool.py --port /dev/ttyACM0 --baud 921600 erase_flash
 *(If the connection times out, hold down the `BOOT` button on the board while the command initiates).*
 
 #### 4.5 Step 3: Flash the Firmware Binaries
-Flash all three binary files to their designated memory locations from the `esp32/marauder` root:
+From the `esp32/marauder` directory, flash the binaries to their exact memory offsets:
 
 ```bash
-esptool.py --port /dev/ttyACM0 --baud 921600 write_flash -z \
-  0x1000 firmware/bootloader.bin \
-  0x8000 firmware/partitions.bin \
-  0x10000 firmware/esp32_marauder_*.bin
+esptool.py --chip esp32 --port /dev/ttyACM0 --baud 921600 write_flash -z \
+  0x1000 firmware/*bootloader*.bin \
+  0x8000 firmware/*partitions*.bin \
+  0xe000 firmware/boot_app0.bin \
+  0x10000 firmware/esp32_marauder_*_esp32_lddb.bin
 ```
 
 ---
