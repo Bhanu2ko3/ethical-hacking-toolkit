@@ -1,0 +1,106 @@
+# ------------------------------------------------------------------------------
+# Git Ignore - Ethical Hacking & Security Research Toolkit
+# ------------------------------------------------------------------------------
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.directory
+
+# IDEs & Editors
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Python Environment & Caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# C / C++ / Embedded Compilers & Build Artifacts
+*.o
+*.obj
+*.elf
+*.bin
+*.hex
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Embedded & Hardware Tools (PlatformIO, Arduino, ESP-IDF)
+.pio/
+.pioenvs/
+.piolibdeps/
+.clang_complete
+.gcc-flags.json
+sdkconfig
+sdkconfig.old
+build/
+managed_components/
+dependencies.lock
+
+# Security Captures, Hashes & Audit Logs (CRITICAL - DO NOT COMMIT SENSITIVE DATA)
+*.pcap
+*.pcapng
+*.cap
+*.hccapx
+*.22000
+*.hcmask
+*.hash
+*.potfile
+*.cracked
+*.creds
+*.log
+logs/
+captures/
+dumps/
+handshakes/
+wordlists/
+*.dict
+*.wordlist
+
+# Secrets & Environment Variables
+.env
+.env.*
+!.env.example
+secrets.*
+credentials.*
+*.pem
+*.key
+*.crt
+id_rsa
+id_ecdsa
+id_ed25519
