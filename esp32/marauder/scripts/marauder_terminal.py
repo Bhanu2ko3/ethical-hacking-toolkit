@@ -7,6 +7,7 @@ Runs at 115200 baud.
 
 import sys
 import os
+import time
 import threading
 import serial
 import serial.tools.list_ports
@@ -55,18 +56,19 @@ def main():
     print(f" [*] Target Port : {port}")
     print(f" [*] Baud Rate   : {BAUD_RATE}")
     print(" [*] Controls    : Type Marauder commands & press Enter")
-    print(" [*] Note        : Sending auto-reset pulse to ESP32...")
     print(" [*] Exit        : Press Ctrl+C to terminate session")
     print("==================================================\n")
 
     try:
         ser = serial.Serial(port, BAUD_RATE, timeout=1)
-        # Pulse RTS to auto-reset ESP32 into Marauder on connection (like pressing EN button)
-        ser.setDTR(False)
-        ser.setRTS(True)
-        import time
-        time.sleep(0.1)
-        ser.setRTS(False)
+        # Soft reset via DTR/RTS to auto-trigger the Marauder startup banner
+        try:
+            ser.dtr = False
+            ser.rts = True
+            time.sleep(0.1)
+            ser.rts = False
+        except Exception:
+            pass
     except Exception as e:
         print(f"[-] Error: Could not connect to {port}: {e}")
         available = [p.device for p in serial.tools.list_ports.comports()]
@@ -81,6 +83,7 @@ def main():
 
     # CLI interaction loop
     try:
+        time.sleep(0.5)
         # Send initial newline to prompt the CLI interface
         ser.write(b"\r\n")
         while True:
