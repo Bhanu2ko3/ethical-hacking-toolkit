@@ -55,11 +55,18 @@ def main():
     print(f" [*] Target Port : {port}")
     print(f" [*] Baud Rate   : {BAUD_RATE}")
     print(" [*] Controls    : Type Marauder commands & press Enter")
+    print(" [*] Note        : Sending auto-reset pulse to ESP32...")
     print(" [*] Exit        : Press Ctrl+C to terminate session")
     print("==================================================\n")
 
     try:
         ser = serial.Serial(port, BAUD_RATE, timeout=1)
+        # Pulse RTS to auto-reset ESP32 into Marauder on connection (like pressing EN button)
+        ser.setDTR(False)
+        ser.setRTS(True)
+        import time
+        time.sleep(0.1)
+        ser.setRTS(False)
     except Exception as e:
         print(f"[-] Error: Could not connect to {port}: {e}")
         available = [p.device for p in serial.tools.list_ports.comports()]
