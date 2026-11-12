@@ -18,14 +18,21 @@ The project is structured modularly to support multiple domains of security expl
 
 ```text
 ├── esp32/                        # Hardware Hacking & Wireless Auditing
-│   └── docs/
-│       └── esp32_overview_and_capabilities.md   # ESP32 DevKit V1 Hardware & Wi-Fi Guide
+│   ├── docs/
+│   │   └── esp32_overview_and_capabilities.md   # ESP32 DevKit V1 Hardware & Wi-Fi Guide
+│   └── marauder/                 # ESP32 Marauder Wireless Auditing Suite
+│       ├── docs/
+│       │   ├── workflow_and_flashing_guide.md   # Flashing & Deployment Guide
+│       │   └── hands_on_lab_guide.md            # Step-by-Step Hands-On Labs Manual
+│       ├── firmware/                            # Pre-compiled Marauder binaries
+│       └── scripts/
+│           └── marauder_terminal.py             # Cross-platform interactive serial terminal
 ├── network-auditing/             # (Planned) Packet analysis, port scanning, traffic monitors
 ├── web-security/                 # (Planned) Security test beds, API audits, validation scripts
 ├── cryptography-labs/            # (Planned) Hash cracking benchmarks, cipher analyses
 ├── scripts/                      # (Planned) Multi-purpose Python, Bash, and automation utilities
 ├── .gitignore                    # Prevents commits of sensitive logs, pcaps, and build artifacts
-├── LICENSE                       # MIT License
+├── LICENSE                       # Open-Source License
 └── README.md                     # Main project guide
 ```
 
@@ -40,7 +47,10 @@ The project is structured modularly to support multiple domains of security expl
   * EAPOL handshake & PMKID capture for offline password audit experiments.
   * Testing 802.11w Management Frame Protection (MFP) resilience.
   * Bluetooth Low Energy (BLE) advertisement scanning and IoT perimeter assessment.
-* **Documentation:** Detailed guide available at [esp32_overview_and_capabilities.md](esp32/docs/esp32_overview_and_capabilities.md).
+* **Core Documentation & Guides:**
+  * [esp32_overview_and_capabilities.md](esp32/docs/esp32_overview_and_capabilities.md): Hardware architectural breakdown.
+  * [workflow_and_flashing_guide.md](esp32/marauder/docs/workflow_and_flashing_guide.md): Complete flashing and deployment procedure.
+  * [hands_on_lab_guide.md](esp32/marauder/docs/hands_on_lab_guide.md): Practical step-by-step wireless security lab manual.
 
 ---
 

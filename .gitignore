@@ -52,6 +52,7 @@ wheels/
 *.obj
 *.elf
 *.bin
+!esp32/marauder/firmware/*.bin
 *.hex
 *.a
 *.lib
