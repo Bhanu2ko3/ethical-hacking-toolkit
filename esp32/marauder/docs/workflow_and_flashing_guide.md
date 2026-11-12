@@ -122,6 +122,13 @@ ls -la esp32/marauder/firmware/
 #### 4.3 Step 1: Query Chip Information
 Verify communication and read MAC address and flash size:
 
+> [!TIP]
+> **Serial Port Across Operating Systems:**  
+> * **Linux:** `/dev/ttyACM0` or `/dev/ttyUSB0`  
+> * **Windows:** `COM3`, `COM4`, etc.  
+> * **macOS:** `/dev/cu.usbserial-*` or `/dev/cu.usbmodem*`  
+> *(Replace `/dev/ttyACM0` below with your respective OS serial port).*
+
 ```bash
 esptool.py --port /dev/ttyACM0 chip_id
 ```
@@ -138,6 +145,8 @@ esptool.py --port /dev/ttyACM0 --baud 921600 erase_flash
 From the `esp32/marauder` directory, flash the binaries to their exact memory offsets:
 
 ```bash
+cd esp32/marauder
+
 esptool.py --chip esp32 --port /dev/ttyACM0 --baud 921600 write_flash -z \
   0x1000 firmware/esp32_marauder_installer_v1_20_0_20261028_esp32_lddb.bootloader.bin \
   0x8000 firmware/esp32_marauder_installer_v1_20_0_20261028_esp32_lddb.partition-table.bin \
@@ -152,11 +161,15 @@ esptool.py --chip esp32 --port /dev/ttyACM0 --baud 921600 write_flash -z \
 Once flashing is complete, press the **`EN`** button on the ESP32. Open a serial connection at **115200 baud**:
 
 ```bash
-# Using python miniterm:
-python3 -m serial.tools.miniterm /dev/ttyACM0 115200
+# Using the project's cross-platform launcher (auto-detects serial port):
+python3 scripts/marauder_terminal.py
 
-# Or using picocom / screen:
+# Or explicitly pass port:
+python3 scripts/marauder_terminal.py /dev/ttyACM0
+
+# Or using picocom / miniterm:
 picocom -b 115200 /dev/ttyACM0
+# python3 -m serial.tools.miniterm /dev/ttyACM0 115200
 ```
 
 ### Essential Marauder Command Reference

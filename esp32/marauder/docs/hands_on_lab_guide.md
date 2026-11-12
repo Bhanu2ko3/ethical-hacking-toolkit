@@ -51,9 +51,13 @@ Capture and enumerate surrounding 2.4 GHz wireless networks without transmitting
 * When a network is "Hidden", the SSID field in the beacon frame is left empty (length = 0) or filled with null bytes. However, when a client device connects to a hidden network, it sends a **Probe Request / Association Request** containing the actual SSID, which the ESP32 sniffs to unmask the hidden network.
 
 ### 1.3 Step-by-Step Execution
-Open the Marauder terminal:
+Open the Marauder terminal (from the repository root):
 ```bash
-python3 /home/codebro/self-study/hacking-tools/esp32/marauder/scripts/marauder_terminal.py
+# Auto-detects port or connects to /dev/ttyACM0:
+python3 esp32/marauder/scripts/marauder_terminal.py
+
+# Or explicitly provide your serial port if different (e.g., /dev/ttyUSB0, COM3):
+python3 esp32/marauder/scripts/marauder_terminal.py <PORT>
 ```
 
 Run the following commands sequentially:
@@ -189,3 +193,4 @@ Test BLE notification handling:
 ```text
 > stopscan
 ```
+
