@@ -19,3 +19,4 @@ This directory contains resources, binaries, and documentation for deploying the
 * **Serial Port:** `/dev/ttyACM0` (or `/dev/ttyUSB0`)
 * **Default Baud Rate:** `115200`
 * **Firmware Source:** [JustCallMeKoko / ESP32Marauder](https://github.com/justcallmekoko/ESP32Marauder)
+

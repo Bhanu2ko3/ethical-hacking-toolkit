@@ -139,10 +139,10 @@ From the `esp32/marauder` directory, flash the binaries to their exact memory of
 
 ```bash
 esptool.py --chip esp32 --port /dev/ttyACM0 --baud 921600 write_flash -z \
-  0x1000 firmware/*bootloader*.bin \
-  0x8000 firmware/*partitions*.bin \
-  0xe000 firmware/boot_app0.bin \
-  0x10000 firmware/esp32_marauder_*_esp32_lddb.bin
+  0x1000 firmware/esp32_marauder_installer_v1_20_0_20261028_esp32_lddb.bootloader.bin \
+  0x8000 firmware/esp32_marauder_installer_v1_20_0_20261028_esp32_lddb.partition-table.bin \
+  0xe000 firmware/esp32_marauder_installer_v1_20_0_20261028_esp32_lddb.ota-data.bin \
+  0x10000 firmware/esp32_marauder_installer_v1_20_0_20261028_esp32_lddb.bin
 ```
 
 ---
