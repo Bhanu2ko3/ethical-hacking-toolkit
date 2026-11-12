@@ -65,9 +65,29 @@ flowchart TD
 
 ---
 
-## 4. Flashing Procedure & Technical Commands
+## 4. Acquisition & Flashing Procedures
 
-### 4.1 Prerequisites
+There are two primary methods to install ESP32 Marauder:
+* **Method A (Web Installer - Recommended & Fastest):** One-click flashing directly from a Chrome/Edge browser using WebSerial.
+* **Method B (Manual Binary Download & CLI Flashing):** Downloading the pre-compiled `.bin` files into the `firmware/` directory and flashing via `esptool.py`.
+
+---
+
+### Method A: One-Click Web Installer (Fastest)
+
+1. Connect the ESP32 DevKit V1 to the PC via Micro-USB.
+2. Open Google Chrome or Microsoft Edge and navigate to the official Marauder web installer:
+   * **URL:** [https://justcallmekoko.github.io/MarauderInstaller/](https://justcallmekoko.github.io/MarauderInstaller/)
+3. Select the appropriate hardware target:
+   * Choose **"ESP32 (Standard / No Screen)"** or **"ESP32 Dev Board"**.
+4. Click **Connect**, select the serial port (`/dev/ttyACM0` or `/dev/ttyUSB0`), and click **Install Marauder**.
+5. The web installer automatically flashes the bootloader, partitions, and application binaries without needing manual command execution.
+
+---
+
+### Method B: Manual Binary Download & CLI Flashing
+
+#### 4.1 Prerequisites
 Ensure Python and `esptool` are installed, and user permissions allow access to the serial device node:
 
 ```bash
@@ -78,14 +98,31 @@ pip install esptool pyserial
 sudo usermod -aG dialout $USER
 ```
 
-### 4.2 Step 1: Query Chip Information
+#### 4.2 Downloading Firmware Binaries into `firmware/`
+The official firmware binaries are released on the project's GitHub release repository:
+* **GitHub Releases:** [https://github.com/justcallmekoko/ESP32Marauder/releases](https://github.com/justcallmekoko/ESP32Marauder/releases)
+
+For the headless ESP32 DevKit V1, obtain the latest release assets:
+1. `bootloader.bin`
+2. `partitions.bin`
+3. `esp32_marauder_vX.X_esp32_ldb.bin` (or `_esp32.bin` headless version)
+
+Place these three downloaded files directly into the `esp32/marauder/firmware/` folder:
+
+```bash
+cd esp32/marauder/firmware/
+# Example manual download commands:
+# wget https://github.com/justcallmekoko/ESP32Marauder/releases/download/vX.X.X/esp32_marauder_vX.X.X_esp32_ldb.bin
+```
+
+#### 4.3 Step 1: Query Chip Information
 Verify communication and read MAC address and flash size:
 
 ```bash
 esptool.py --port /dev/ttyACM0 chip_id
 ```
 
-### 4.3 Step 2: Erase Flash Memory
+#### 4.4 Step 2: Erase Flash Memory
 Erase existing firmware partitions to ensure a clean slate:
 
 ```bash
@@ -93,14 +130,14 @@ esptool.py --port /dev/ttyACM0 --baud 921600 erase_flash
 ```
 *(If the connection times out, hold down the `BOOT` button on the board while the command initiates).*
 
-### 4.4 Step 3: Flash the Firmware Binaries
-Flash all three binary files to their designated memory locations:
+#### 4.5 Step 3: Flash the Firmware Binaries
+Flash all three binary files to their designated memory locations from the `esp32/marauder` root:
 
 ```bash
 esptool.py --port /dev/ttyACM0 --baud 921600 write_flash -z \
   0x1000 firmware/bootloader.bin \
   0x8000 firmware/partitions.bin \
-  0x10000 firmware/esp32_marauder_vX.X_esp32_ldb.bin
+  0x10000 firmware/esp32_marauder_*.bin
 ```
 
 ---
@@ -152,3 +189,4 @@ picocom -b 115200 /dev/ttyACM0
 > **IMPORTANT NOTICE:**  
 > This documentation, firmware, and associated hardware are strictly for **independent educational research, personal self-study, and authorized defensive security assessments** conducted on privately owned networks or authorized lab environments.  
 > Intercepting, disrupting, or targeting third-party networks without explicit authorization is strictly illegal under applicable national and international cybercrime legislation.
+
